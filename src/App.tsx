@@ -1,13 +1,31 @@
+import CheckIcon from "./assets/icons/check.svg?react"
+import PencilIcon from "./assets/icons/pencil.svg?react"
+import PlusIcon from "./assets/icons/plus.svg?react"
+import SpinnerIcon from "./assets/icons/spinner.svg?react"
+import TrashIcon from "./assets/icons/trash.svg?react"
+import XIcon from "./assets/icons/x.svg?react"
+import { Icon } from "./components/icon"
 import { Text } from "./components/text"
 
 export function App() {
   return (
-    <div className="flex flex-col gap-2">
-      <Text variant="body-sm-bold" className="text-pink-base">
-        Olá mundo!
-      </Text>
-      <Text className="text-green-base">Olá mundo!</Text>
-      <Text variant="body-md-bold">Olá mundo!</Text>
+    <div className="grid gap-3">
+      <div className="flex flex-col gap-2">
+        <Text className="text-pink-base" variant="body-sm-bold">
+          Olá mundo!
+        </Text>
+        <Text className="text-green-base">Olá mundo!</Text>
+        <Text variant="body-md-bold">Olá mundo!</Text>
+      </div>
+
+      <div className="flex gap-1">
+        <Icon className="fill-green-base" svg={TrashIcon} />
+        <Icon svg={CheckIcon} />
+        <Icon svg={PencilIcon} />
+        <Icon svg={PlusIcon} />
+        <Icon animate svg={SpinnerIcon} />
+        <Icon svg={XIcon} />
+      </div>
     </div>
   )
 }
