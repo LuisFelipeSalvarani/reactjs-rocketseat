@@ -8,6 +8,7 @@ import { Badge } from "./components/badge"
 import { Button } from "./components/button"
 import { ButtonIcon } from "./components/button-icon"
 import { Card } from "./components/card"
+import { Container } from "./components/container"
 import { Icon } from "./components/icon"
 import { InputCheckbox } from "./components/input-checkbox"
 import { InputText } from "./components/input-text"
@@ -15,50 +16,52 @@ import { Text } from "./components/text"
 
 export function App() {
   return (
-    <div className="grid gap-10">
-      <div className="flex flex-col gap-2">
-        <Text className="text-pink-base" variant="body-sm-bold">
-          Olá mundo!
-        </Text>
-        <Text className="text-green-base">Olá mundo!</Text>
-        <Text variant="body-md-bold">Olá mundo!</Text>
-      </div>
+    <Container>
+      <div className="grid gap-10">
+        <div className="flex flex-col gap-2">
+          <Text className="text-pink-base" variant="body-sm-bold">
+            Olá mundo!
+          </Text>
+          <Text className="text-green-base">Olá mundo!</Text>
+          <Text variant="body-md-bold">Olá mundo!</Text>
+        </div>
 
-      <div className="flex gap-1">
-        <Icon className="fill-green-base" svg={TrashIcon} />
-        <Icon svg={CheckIcon} />
-        <Icon svg={PencilIcon} />
-        <Icon svg={PlusIcon} />
-        <Icon animate svg={SpinnerIcon} />
-        <Icon svg={XIcon} />
-      </div>
+        <div className="flex gap-1">
+          <Icon className="fill-green-base" svg={TrashIcon} />
+          <Icon svg={CheckIcon} />
+          <Icon svg={PencilIcon} />
+          <Icon svg={PlusIcon} />
+          <Icon animate svg={SpinnerIcon} />
+          <Icon svg={XIcon} />
+        </div>
 
-      <div>
-        <Badge variant="secondary">5</Badge>
-        <Badge variant="primary">2 de 5</Badge>
-      </div>
+        <div>
+          <Badge variant="secondary">5</Badge>
+          <Badge variant="primary">2 de 5</Badge>
+        </div>
 
-      <div>
-        <Button icon={XIcon}>Nova Tarefa</Button>
-      </div>
+        <div>
+          <Button icon={XIcon}>Nova Tarefa</Button>
+        </div>
 
-      <div className="flex gap-1">
-        <ButtonIcon icon={TrashIcon} />
-        <ButtonIcon icon={TrashIcon} variant="secondary" />
-        <ButtonIcon icon={TrashIcon} variant="tertiary" />
-      </div>
+        <div className="flex gap-1">
+          <ButtonIcon icon={TrashIcon} />
+          <ButtonIcon icon={TrashIcon} variant="secondary" />
+          <ButtonIcon icon={TrashIcon} variant="tertiary" />
+        </div>
 
-      <div>
-        <InputText />
-      </div>
+        <div>
+          <InputText />
+        </div>
 
-      <div>
-        <InputCheckbox />
-      </div>
+        <div>
+          <InputCheckbox />
+        </div>
 
-      <div>
-        <Card size="md" />
+        <div>
+          <Card size="md" />
+        </div>
       </div>
-    </div>
+    </Container>
   )
 }
