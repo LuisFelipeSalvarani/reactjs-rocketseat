@@ -71,7 +71,7 @@ export function Button({
       className={buttonVariants({ className, disabled, size, variant })}
       {...props}
     >
-      {IconComponent && (
+      {!!IconComponent && (
         <Icon
           className={buttonIconVariants({ size, variant })}
           svg={IconComponent}
