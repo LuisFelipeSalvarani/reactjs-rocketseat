@@ -11,6 +11,9 @@
       "style": {
         "noEnum": "off",
         "noSubstr": "off"
+      },
+      "performance": {
+        "noJsxPropsBind": "off"
       }
     }
   }
