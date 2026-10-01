@@ -2,11 +2,11 @@ import PlusIcon from "../assets/icons/plus.svg?react"
 import { Button } from "../components/button"
 import { useTask } from "../hooks/use-task"
 import { useTasks } from "../hooks/use-tasks"
-import { TaskState } from "../models/task"
+import { type Task, TaskState } from "../models/task"
 import { TaskItem } from "./task-item"
 
 export function TasksList() {
-  const { tasks } = useTasks()
+  const { tasks, isLoadingTasks } = useTasks()
   const { prepareTask } = useTask()
 
   console.log(tasks)
@@ -20,7 +20,10 @@ export function TasksList() {
       <section>
         <Button
           className="w-full"
-          disabled={tasks.some((task) => task.state === TaskState.Creating)}
+          disabled={
+            tasks.some((task) => task.state === TaskState.Creating) ||
+            isLoadingTasks
+          }
           icon={PlusIcon}
           onClick={handleNewTask}
         >
@@ -28,9 +31,15 @@ export function TasksList() {
         </Button>
       </section>
       <section className="space-y-2">
-        {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
-        ))}
+        {!isLoadingTasks &&
+          tasks.map((task) => <TaskItem key={task.id} task={task} />)}
+        {!!isLoadingTasks && (
+          <>
+            <TaskItem loading={isLoadingTasks} task={{} as Task} />
+            <TaskItem loading={isLoadingTasks} task={{} as Task} />
+            <TaskItem loading={isLoadingTasks} task={{} as Task} />
+          </>
+        )}
       </section>
     </>
   )
