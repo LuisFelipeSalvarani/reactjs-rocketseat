@@ -1,5 +1,5 @@
 import { cx } from "class-variance-authority"
-import { useState } from "react"
+import { type ChangeEvent, type SyntheticEvent, useState } from "react"
 import CheckIcon from "../assets/icons/check.svg?react"
 import PencilIcon from "../assets/icons/pencil.svg?react"
 import TrashIcon from "../assets/icons/trash.svg?react"
@@ -17,6 +17,7 @@ interface TaskItemProps {
 
 export function TaskItem({ task }: TaskItemProps) {
   const [isEditing, setIsEditing] = useState(task?.state === TaskState.Creating)
+  const [taskTitle, setTaskTitle] = useState("")
 
   function handleEditTask() {
     setIsEditing(true)
@@ -26,22 +27,39 @@ export function TaskItem({ task }: TaskItemProps) {
     setIsEditing(false)
   }
 
+  function handleChangeTaskTitle(e: ChangeEvent<HTMLInputElement>) {
+    setTaskTitle(e.target.value || "")
+  }
+
+  function handleSaveTask(e: SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault()
+    console.log({ id: task.id, title: taskTitle })
+    // chamada para função de atualizar
+    setIsEditing(false)
+  }
+
   return (
-    <Card className="flex items-center gap-4" size="md">
+    <Card size="md">
       {isEditing ? (
-        <>
-          <InputText className="flex-1" />
+        <form className="flex items-center gap-4" onSubmit={handleSaveTask}>
+          <InputText
+            autoFocus
+            className="flex-1"
+            onChange={handleChangeTaskTitle}
+            required
+          />
           <div className="flex gap-1">
             <ButtonIcon
               icon={XIcon}
               onClick={handleExitEditTask}
+              type="button"
               variant="secondary"
             />
-            <ButtonIcon icon={CheckIcon} variant="primary" />
+            <ButtonIcon icon={CheckIcon} type="submit" variant="primary" />
           </div>
-        </>
+        </form>
       ) : (
-        <>
+        <div className="flex items-center gap-4">
           <InputCheckbox
             checked={task?.concluded}
             value={task?.concluded?.toString()}
@@ -61,7 +79,7 @@ export function TaskItem({ task }: TaskItemProps) {
               variant="tertiary"
             />
           </div>
-        </>
+        </div>
       )}
     </Card>
   )
