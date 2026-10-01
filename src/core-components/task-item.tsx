@@ -19,7 +19,7 @@ interface TaskItemProps {
 export function TaskItem({ task }: TaskItemProps) {
   const [isEditing, setIsEditing] = useState(task?.state === TaskState.Creating)
   const [taskTitle, setTaskTitle] = useState(task?.title || "")
-  const { updateTask } = useTask()
+  const { updateTask, updateTaskStatus } = useTask()
 
   function handleEditTask() {
     setIsEditing(true)
@@ -38,6 +38,12 @@ export function TaskItem({ task }: TaskItemProps) {
 
     updateTask(task.id, { title: taskTitle })
     setIsEditing(false)
+  }
+
+  function handleChangeTaskStatus(e: ChangeEvent<HTMLInputElement>) {
+    const { checked } = e.target
+
+    updateTaskStatus(task.id, checked)
   }
 
   return (
@@ -65,7 +71,7 @@ export function TaskItem({ task }: TaskItemProps) {
         <div className="flex items-center gap-4">
           <InputCheckbox
             checked={task?.concluded}
-            value={task?.concluded?.toString()}
+            onChange={handleChangeTaskStatus}
           />
           <Text
             className={cx("flex-1", {
